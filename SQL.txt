@@ -1,0 +1,28 @@
+﻿
+
+CREATE TABLE [dbo].[Categories] (
+  [Id] int IDENTITY(1, 1) NOT NULL,
+  [Name] nvarchar(255) NOT NULL,
+  PRIMARY KEY CLUSTERED ([Id])
+)
+GO
+
+CREATE TABLE [dbo].[Products] (
+  [Id] int IDENTITY(1, 1) NOT NULL,
+  [Updated] datetime NOT NULL,
+  [Name] nvarchar(255) NOT NULL,
+  [Code] nvarchar(50) NOT NULL,
+  [CategoryId] int NOT NULL,
+  [Price] float DEFAULT 0 NOT NULL,
+  [IsActive] bit DEFAULT 1 NULL,
+  PRIMARY KEY CLUSTERED ([Id])
+)
+GO
+
+ALTER TABLE [dbo].[Products]
+ADD CONSTRAINT [FK_Products_Category] FOREIGN KEY ([CategoryId]) 
+  REFERENCES [dbo].[Categories] ([Id]) 
+  ON UPDATE NO ACTION
+  ON DELETE NO ACTION
+GO
+
